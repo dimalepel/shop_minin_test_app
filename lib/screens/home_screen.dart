@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_minin_test_app/screens/category_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -93,36 +94,39 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView.builder(
             itemCount: categoriesTitle.length,
             itemBuilder: (_, index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Container(
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          categoriesPreview[index],
-                          fit: BoxFit.cover,
-                          height: 148,
-                          width: MediaQuery.of(context).size.width,
+              return InkWell(
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen())),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            categoriesPreview[index],
+                            fit: BoxFit.cover,
+                            height: 148,
+                            width: MediaQuery.of(context).size.width,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                          left: 16,
-                          top: 12,
-                          child: SizedBox(
-                            width: 190,
-                            child: Text(
-                              categoriesTitle[index],
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
+                        Positioned(
+                            left: 16,
+                            top: 12,
+                            child: SizedBox(
+                              width: 190,
+                              child: Text(
+                                categoriesTitle[index],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                          )
-                      ),
-                    ],
+                            )
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -178,138 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
-      /*SingleChildScrollView(
-        child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                children: [
-                  Container(
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            categoriesPreview[0],
-                            fit: BoxFit.cover,
-                            height: 148,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Positioned(
-                          left: 16,
-                          top: 12,
-                          child: SizedBox(
-                            width: 190,
-                            child: Text(
-                              categoriesTitle[0],
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                            ),
-                          )
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            categoriesPreview[1],
-                            fit: BoxFit.cover,
-                            height: 148,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Positioned(
-                            left: 16,
-                            top: 12,
-                            child: SizedBox(
-                              width: 190,
-                              child: Text(
-                                categoriesTitle[1],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            categoriesPreview[2],
-                            fit: BoxFit.cover,
-                            height: 148,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Positioned(
-                            left: 16,
-                            top: 12,
-                            child: SizedBox(
-                              width: 190,
-                              child: Text(
-                                categoriesTitle[2],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            categoriesPreview[3],
-                            fit: BoxFit.cover,
-                            height: 148,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Positioned(
-                            left: 16,
-                            top: 12,
-                            child: SizedBox(
-                              width: 190,
-                              child: Text(
-                                categoriesTitle[3],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ),*/
     );
   }
 }
