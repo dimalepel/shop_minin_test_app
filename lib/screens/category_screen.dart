@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/product_model.dart';
 
 class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+  final String categoryName;
+
+  const CategoryScreen({super.key, required this.categoryName});
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -203,7 +205,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ],
         title: Text(
-          'Азиатская кухня',
+          widget.categoryName,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,

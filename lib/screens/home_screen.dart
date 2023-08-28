@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_minin_test_app/screens/category_screen.dart';
+import 'package:shop_minin_test_app/widgets/bottom_navigation.dart';
+
+import '../models/category_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,26 +13,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> categoriesPreview = [
-    'assets/images/category_1.png',
-    'assets/images/category_2.png',
-    'assets/images/category_3.png',
-    'assets/images/category_4.png',
-    'assets/images/category_1.png',
-    'assets/images/category_2.png',
-    'assets/images/category_3.png',
-    'assets/images/category_4.png'
-  ];
-
-  final List<String> categoriesTitle= [
-    'Пекарни и кондитерские ',
-    'Фастфуд',
-    'Азиатская кухня',
-    'Супы',
-    'Пекарни и кондитерские ',
-    'Фастфуд',
-    'Азиатская кухня',
-    'Супы'
+  final List<Category> categories = [
+    Category(
+        id: 1,
+        name: 'Пекарни и кондитерское',
+        imageUrl: 'assets/images/category_1.png'
+    ),
+    Category(
+        id: 2,
+        name: 'Фастфуд',
+        imageUrl: 'assets/images/category_2.png'
+    ),
+    Category(
+        id: 3,
+        name: 'Азиатская кухня',
+        imageUrl: 'assets/images/category_3.png'
+    ),
+    Category(
+        id: 4,
+        name: 'Супы',
+        imageUrl: 'assets/images/category_4.png'
+    ),
+    Category(
+        id: 1,
+        name: 'Пекарни и кондитерское',
+        imageUrl: 'assets/images/category_1.png'
+    ),
+    Category(
+        id: 2,
+        name: 'Фастфуд',
+        imageUrl: 'assets/images/category_2.png'
+    ),
+    Category(
+        id: 3,
+        name: 'Азиатская кухня',
+        imageUrl: 'assets/images/category_3.png'
+    ),
+    Category(
+        id: 4,
+        name: 'Супы',
+        imageUrl: 'assets/images/category_4.png'
+    ),
   ];
 
   @override
@@ -47,21 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.person_pin_circle_outlined,
-                      size: 24,
-                      color: Colors.black,
+                    SvgPicture.asset(
+                      'assets/images/svgs/icon_location.svg',
+                      width: 24,
+                      height: 24,
                     ),
                     const SizedBox(width: 4,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
                         const Text(
                           'Санкт-Петербург',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
+                            fontFamily: 'San Francisco',
+                            fontWeight: FontWeight.w500
                           ),
                         ),
                         const SizedBox(height: 4,),
@@ -69,6 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           '12 Августа, 2023',
                           style: TextStyle(
                             fontSize: 14,
+                            fontFamily: 'San Francisco',
+                            fontWeight: FontWeight.w400,
                             color: Colors.black.withOpacity(0.5),
                           ),
                         ),
@@ -92,10 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Padding(
         padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
         child: ListView.builder(
-            itemCount: categoriesTitle.length,
+            itemCount: categories.length,
             itemBuilder: (_, index) {
               return InkWell(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen())),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(categoryName: categories[index].name,))),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Container(
@@ -104,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            categoriesPreview[index],
+                            categories[index].imageUrl,
                             fit: BoxFit.cover,
                             height: 148,
                             width: MediaQuery.of(context).size.width,
@@ -116,9 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: SizedBox(
                               width: 190,
                               child: Text(
-                                categoriesTitle[index],
+                                categories[index].name,
                                 style: TextStyle(
                                   fontSize: 20,
+                                  fontFamily: 'San Francisco',
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                 ),
@@ -133,55 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedIconTheme: IconThemeData(
-          color: Color(0xff3364E0),
-        ),
-        useLegacyColorScheme: false,
-        unselectedLabelStyle: TextStyle(
-          color: Color(0xffA5A9B2),
-          fontSize: 12,
-          fontWeight: FontWeight.w500
-        ),
-        selectedItemColor: Color(0xff3364E0),
-        selectedLabelStyle: TextStyle(
-          color: Color(0xff3364E0),
-            fontSize: 12,
-            fontWeight: FontWeight.w500
-        ),
-        showUnselectedLabels: true,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Главная',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Поиск',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Корзина',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle_outlined,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Аккаунта',
-          ),
-        ],
-      ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }

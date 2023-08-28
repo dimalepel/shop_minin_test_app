@@ -1,9 +1,9 @@
 class Product {
-  late String title;
-  late String imageUrl;
-  late int price;
-  late int weight;
-  late String description;
+  String title;
+  String imageUrl;
+  int price;
+  int weight;
+  String description;
 
   Product({
     required this.title,
