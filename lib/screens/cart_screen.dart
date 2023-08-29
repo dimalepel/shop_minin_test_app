@@ -250,7 +250,7 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: BottomNavigation(selectedIndex: 2,),
     );
   }
 }

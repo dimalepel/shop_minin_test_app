@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
         ),
       ),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: BottomNavigation(selectedIndex: 0,),
     );
   }
 }
