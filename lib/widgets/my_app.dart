@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_minin_test_app/screens/home_screen.dart';
 
+import '../screens/cart_screen.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -9,7 +11,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Доставка Еды',
-      home: HomeScreen(),
+      home: CartScreen(),
     );
   }
 }
