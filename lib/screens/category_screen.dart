@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 import '../models/product_model.dart';
+import '../widgets/bottom_navigation.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String categoryName;
@@ -12,22 +14,15 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  final List<String> tags = [
-    'Все меню',
-    'Салаты',
-    'С рисом',
-    'С рыбой',
-    'Роллы'
-  ];
-
-  final List<Product> products = [
+   final List<Product> products = [
     Product(
       id: 1,
       name: 'Рис с овощами',
       imageUrl: 'assets/images/product_1.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 2,
@@ -35,7 +30,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_2.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'Салаты']
     ),
     Product(
       id: 3,
@@ -43,7 +39,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_3.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'С рыбой']
     ),
     Product(
       id: 4,
@@ -51,7 +48,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_4.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'С рыбой']
     ),
     Product(
       id: 5,
@@ -59,7 +57,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_5.png',
       price: 390,
       weight: 420,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'Салаты']
     ),
     Product(
       id: 6,
@@ -67,7 +66,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_6.png',
       price: 815,
       weight: 380,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 7,
@@ -75,7 +75,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_1.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 8,
@@ -83,7 +84,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_2.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 9,
@@ -91,7 +93,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_3.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 10,
@@ -99,7 +102,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_4.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты'],
     ),
     Product(
       id: 11,
@@ -107,7 +111,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_5.png',
       price: 390,
       weight: 420,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 12,
@@ -115,7 +120,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_6.png',
       price: 815,
       weight: 380,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 13,
@@ -123,7 +129,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_1.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 14,
@@ -131,7 +138,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_2.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 15,
@@ -139,7 +147,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_3.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 16,
@@ -147,7 +156,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_4.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 17,
@@ -155,7 +165,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_5.png',
       price: 390,
       weight: 420,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 18,
@@ -163,7 +174,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_6.png',
       price: 815,
       weight: 380,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 19,
@@ -171,7 +183,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_1.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 20,
@@ -179,7 +192,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_2.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 21,
@@ -187,7 +201,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_3.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 22,
@@ -195,7 +210,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_4.png',
       price: 799,
       weight: 560,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С рисом', 'Салаты']
     ),
     Product(
       id: 23,
@@ -203,7 +219,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_5.png',
       price: 390,
       weight: 420,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С зеленью', 'Салаты']
     ),
     Product(
       id: 24,
@@ -211,9 +228,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
       imageUrl: 'assets/images/product_6.png',
       price: 815,
       weight: 380,
-      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой'
+      description: 'Рыба маринованная со специями, лимонным соком, соевым соусом и запечeнная в духовке с лучком, томатами и картошечкой под золотистой майонезно-сырной шубкой',
+      tags: ['Все меню', 'С мясом', 'Салаты']
     ),
   ];
+
+   Set<String> tagsSet = {};
+   List<String> tags = [];
+
+   @override
+   void initState() {
+     for (var p in products) {
+       List<String> curTags = p.tags;
+
+       for (var t in curTags) {
+         tagsSet.add(t);
+       }
+     }
+
+     tags = tagsSet.toList();
+
+     super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -383,7 +419,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          '${products[index].price.toString()} \$ ',
+                                          '${products[index].price.toString()} ₽',
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: Colors.black
@@ -469,55 +505,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedIconTheme: IconThemeData(
-          color: Color(0xff3364E0),
-        ),
-        useLegacyColorScheme: false,
-        unselectedLabelStyle: TextStyle(
-            color: Color(0xffA5A9B2),
-            fontSize: 12,
-            fontWeight: FontWeight.w500
-        ),
-        selectedItemColor: Color(0xff3364E0),
-        selectedLabelStyle: TextStyle(
-            color: Color(0xff3364E0),
-            fontSize: 12,
-            fontWeight: FontWeight.w500
-        ),
-        showUnselectedLabels: true,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Главная',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Поиск',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Корзина',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle_outlined,
-              color: Color(0xffA5A9B2),
-            ),
-            label: 'Аккаунта',
-          ),
-        ],
-      ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }
