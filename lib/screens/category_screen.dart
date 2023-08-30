@@ -4,6 +4,8 @@ import 'dart:developer';
 import '../models/product_model.dart';
 import '../widgets/basic_app_bar.dart';
 import '../widgets/bottom_navigation.dart';
+import '../widgets/catalog_item.dart';
+import '../widgets/tag.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String categoryName;
@@ -268,29 +270,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: tags.length,
                     itemBuilder: (context, index) {
-                      return FittedBox(
-                        child: Container(
-                          height: 40,
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          decoration: BoxDecoration(
-                              color: (index == 0) ? Color(0xff3364E0) : Color(0xffF8F7F5),
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Center(
-                            child: FittedBox(
-                              child: Text(
-                                tags[index],
-                                style: TextStyle(
-                                    color: (index == 0) ? Colors.white : Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
+                      return Tag(tagName: tags[index], index: index,);
                     }
                 ),
               ),
@@ -308,171 +288,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 itemCount: products.length,
                 itemBuilder: (_, index) {
-                  return Container(
-                    child: InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                contentPadding: EdgeInsets.all(16),
-                                content: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(vertical: 14),
-                                              height: 232,
-                                              child: Image.asset(
-                                                products[index].imageUrl,
-                                                fit: BoxFit.contain,
-                                                height: 204,
-                                                width: MediaQuery.of(context).size.width,
-                                              ),
-                                            ),
-                                            Positioned(
-                                              right: 10,
-                                              top: 10,
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    height: 40,
-                                                    width: 40,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(8)
-                                                    ),
-                                                    child: Center(
-                                                      child: Icon(
-                                                          Icons.favorite_border,
-                                                          color: Colors.black
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 8,),
-                                                  InkWell(
-                                                    onTap: () => Navigator.of(context).pop(),
-                                                    child: Container(
-                                                      height: 40,
-                                                      width: 40,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius: BorderRadius.circular(8)
-                                                      ),
-                                                      child: Center(
-                                                        child: Icon(
-                                                            Icons.close,
-                                                            color: Colors.black
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            ),
-                                          ],
-                                        ),
-                                        color: Color(0xffF8F7F5),
-                                      ),
-                                    ),
-                                    SizedBox(height: 8,),
-                                    Text(
-                                      products[index].name,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8,),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '${products[index].price.toString()} ₽',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black
-                                          ),
-                                        ),
-                                        Text(
-                                          '· ${products[index].weight}г',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black.withOpacity(0.4)
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 8,),
-                                    Text(
-                                      products[index].description,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black.withOpacity(0.65)
-                                      ),
-                                    ),
-                                    SizedBox(height: 16,),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        height: 48,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: Color(0xff3364E0),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'Добавить в корзину',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                        );
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                products[index].imageUrl,
-                                fit: BoxFit.cover,
-                                height: 109,
-                                width: 109,
-                              ),
-                            ),
-                            color: Color(0xffF8F7F5),
-                          ),
-                          SizedBox(height: 5,),
-                          Text(
-                            products[index].name,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                            overflow: TextOverflow.clip,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
+                  return CatalogItem(product: products[index],);
                 },
               )
             ],
