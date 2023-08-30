@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:developer';
 
 import '../models/product_model.dart';
+import '../widgets/basic_app_bar.dart';
 import '../widgets/bottom_navigation.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -254,34 +255,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          const Padding(
-              padding: EdgeInsets.only(top: 7, right: 16),
-              child: CircleAvatar(
-                radius: 22,
-                backgroundImage: AssetImage('assets/images/avatar.png'),
-              )
-          ),
-        ],
-        title: Text(
-          widget.categoryName,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Colors.black
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        toolbarHeight: 57,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
-        )
-      ),
+      appBar: BasicAppBar(categoryName: widget.categoryName,),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
