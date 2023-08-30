@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String categoryName;
 
@@ -11,8 +13,8 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        actions: [
-          const Padding(
+        actions: const [
+          Padding(
               padding: EdgeInsets.only(top: 7, right: 16),
               child: CircleAvatar(
                 radius: 22,
@@ -25,16 +27,16 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: Colors.black
+              color: AppColors.black
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.transparent,
         toolbarHeight: 57,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
+          icon: const Icon(Icons.arrow_back_ios),
+          color: AppColors.black,
           onPressed: () => Navigator.of(context).pop(),
         )
     );

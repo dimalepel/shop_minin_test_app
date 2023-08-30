@@ -1,4 +1,4 @@
-class CartItem {
+class CartProduct {
   int id;
   String name;
   String imageUrl;
@@ -6,7 +6,7 @@ class CartItem {
   int weight;
   int qty;
 
-  CartItem({
+  CartProduct({
     required this.id,
     required this.name,
     required this.imageUrl,

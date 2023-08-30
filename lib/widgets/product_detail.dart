@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_minin_test_app/widgets/accent_button.dart';
 
 import '../models/product_model.dart';
+import '../theme/app_colors.dart';
 
 class ProductDetail extends StatelessWidget {
   final Product product;
@@ -11,7 +12,7 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(16),
+      contentPadding: const EdgeInsets.all(16),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -19,6 +20,7 @@ class ProductDetail extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
+              color: const Color(0xffF8F7F5),
               child: Stack(
                 children: [
                   Container(
@@ -40,30 +42,30 @@ class ProductDetail extends StatelessWidget {
                             height: 40,
                             width: 40,
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.white,
                                 borderRadius: BorderRadius.circular(8)
                             ),
                             child: Center(
                               child: Icon(
                                   Icons.favorite_border,
-                                  color: Colors.black
+                                  color: AppColors.black
                               ),
                             ),
                           ),
-                          SizedBox(width: 8,),
+                          const SizedBox(width: 8,),
                           InkWell(
                             onTap: () => Navigator.of(context).pop(),
                             child: Container(
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   borderRadius: BorderRadius.circular(8)
                               ),
                               child: Center(
                                 child: Icon(
                                     Icons.close,
-                                    color: Colors.black
+                                    color: AppColors.black
                                 ),
                               ),
                             ),
@@ -73,46 +75,45 @@ class ProductDetail extends StatelessWidget {
                   ),
                 ],
               ),
-              color: Color(0xffF8F7F5),
             ),
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           Text(
             product.name,
             textAlign: TextAlign.start,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           Row(
             children: [
               Text(
                 '${product.price.toString()} ₽',
                 style: TextStyle(
                     fontSize: 14,
-                    color: Colors.black
+                    color: AppColors.black
                 ),
               ),
               Text(
                 '· ${product.weight}г',
                 style: TextStyle(
                     fontSize: 14,
-                    color: Colors.black.withOpacity(0.4)
+                    color: AppColors.black40
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8,),
+          const SizedBox(height: 8,),
           Text(
             product.description,
             style: TextStyle(
                 fontSize: 14,
-                color: Colors.black.withOpacity(0.65)
+                color: AppColors.black65
             ),
           ),
-          SizedBox(height: 16,),
+          const SizedBox(height: 16,),
           AccentButton(label: 'Добавить в корзину', onTap: () {},),
         ],
       ),

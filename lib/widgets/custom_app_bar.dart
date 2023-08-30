@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import 'location_and_date.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -14,51 +15,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 57,
       elevation: 0,
       leadingWidth: 200,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 16, top: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  'assets/images/svgs/icon_location.svg',
-                  width: 24,
-                  height: 24,
-                ),
-                const SizedBox(width: 4,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Санкт-Петербург',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontFamily: 'San Francisco',
-                          fontWeight: FontWeight.w500
-                      ),
-                    ),
-                    const SizedBox(height: 4,),
-                    Text(
-                      '12 Августа, 2023',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'San Francisco',
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        const Padding(
+      leading: const LocationAndDate(),
+      actions: const [
+        Padding(
             padding: EdgeInsets.only(top: 7, right: 16),
             child: CircleAvatar(
               radius: 22,

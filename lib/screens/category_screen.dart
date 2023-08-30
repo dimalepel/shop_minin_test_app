@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:developer';
 
 import '../models/product_model.dart';
 import '../widgets/basic_app_bar.dart';
@@ -260,7 +259,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       appBar: BasicAppBar(categoryName: widget.categoryName,),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             children: [
               SizedBox(
@@ -274,12 +273,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     }
                 ),
               ),
-              SizedBox(height: 16,),
+              const SizedBox(height: 16,),
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 14,
                   crossAxisSpacing: 8,
@@ -295,7 +294,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigation(selectedIndex: 0,),
+      bottomNavigationBar: const BottomNavigation(selectedIndex: 0,),
     );
   }
 }

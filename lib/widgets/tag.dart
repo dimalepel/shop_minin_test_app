@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 class Tag extends StatelessWidget {
   final String tagName;
   final int index;
@@ -13,7 +15,7 @@ class Tag extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
-            color: (index == 0) ? Color(0xff3364E0) : Color(0xffF8F7F5),
+            color: (index == 0) ? AppColors.blue : AppColors.black,
             borderRadius: BorderRadius.circular(10)
         ),
         child: Center(

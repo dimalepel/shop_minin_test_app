@@ -40,16 +40,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
       onTap: (index) {
         switch(index) {
           case 0:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
             break;
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchScreen()));
             break;
           case 2:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));
             break;
           case 3:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const AccountScreen()));
             break;
         }
       },
