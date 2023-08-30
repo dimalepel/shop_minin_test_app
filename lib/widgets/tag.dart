@@ -15,7 +15,7 @@ class Tag extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
-            color: (index == 0) ? AppColors.blue : AppColors.black,
+            color: (index == 0) ? AppColors.blue : AppColors.grey,
             borderRadius: BorderRadius.circular(10)
         ),
         child: Center(

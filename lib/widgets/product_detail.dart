@@ -12,6 +12,7 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16),
       contentPadding: const EdgeInsets.all(16),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +21,7 @@ class ProductDetail extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
-              color: const Color(0xffF8F7F5),
+              color: AppColors.grey,
               child: Stack(
                 children: [
                   Container(
