@@ -8,12 +8,12 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(),
-      body: Center(
+      body: const Center(
         child: Text('Аккаунт'),
       ),
-      bottomNavigationBar: BottomNavigation(selectedIndex: 3,),
+      bottomNavigationBar: const BottomNavigation(selectedIndex: 3,),
     );
   }
 }

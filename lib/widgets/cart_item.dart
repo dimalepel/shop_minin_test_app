@@ -51,7 +51,7 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${product.price.toString()} \$ ',
+                          '${product.price.toString()} \₽ ',
                           style: TextStyle(
                               fontSize: 14,
                               color: AppColors.black

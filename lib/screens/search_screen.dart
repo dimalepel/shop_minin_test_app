@@ -8,12 +8,12 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(),
-      body: Center(
+      body: const Center(
         child: Text('Поиск'),
       ),
-      bottomNavigationBar: BottomNavigation(selectedIndex: 1,),
+      bottomNavigationBar: const BottomNavigation(selectedIndex: 1,),
     );
   }
 }

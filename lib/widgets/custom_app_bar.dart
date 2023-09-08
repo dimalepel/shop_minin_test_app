@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 57,
       elevation: 0,
       leadingWidth: 200,
-      leading: const LocationAndDate(),
+      leading: LocationAndDate(),
       actions: const [
         Padding(
             padding: EdgeInsets.only(top: 7, right: 16),
