@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import '../theme/app_colors.dart';
 
@@ -8,6 +9,27 @@ class LocationAndDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String locale = Localizations.localeOf(context).languageCode;
+
+    List<String> monthsList = [
+      'Января',
+      'Февраля',
+      'Марта',
+      'Апреля',
+      'Мая',
+      'Июня',
+      'Июля',
+      'Августа',
+      'Сентября',
+      'Октября',
+      'Ноября',
+      'Декабря'];
+
+    DateTime now = DateTime.now();
+    String dayOfWeek = DateFormat.d(locale).format(now);
+    String numberOfMonth = DateFormat.M(locale).format(now);
+    String year = DateFormat.y(locale).format(now);
+
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 8),
       child: Row(
@@ -36,7 +58,7 @@ class LocationAndDate extends StatelessWidget {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    '12 Августа, 2023',
+                    '${dayOfWeek} ${monthsList[int.parse(numberOfMonth) - 1]}, ${year}',
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'San Francisco',
@@ -53,3 +75,4 @@ class LocationAndDate extends StatelessWidget {
     );
   }
 }
+
