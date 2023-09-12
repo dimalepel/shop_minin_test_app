@@ -1,11 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 import '../theme/app_colors.dart';
 
-class LocationAndDate extends StatelessWidget {
+class LocationAndDate extends StatefulWidget {
   const LocationAndDate({super.key});
+
+  @override
+  State<LocationAndDate> createState() => _LocationAndDateState();
+}
+
+class _LocationAndDateState extends State<LocationAndDate> {
+  Position? currentLocation;
+  var markerPoint;
+  late bool servicePermission = false;
+  late LocationPermission permission;
+
+  String currentAddress = "";
+
+  Future<Position> getCurrentLocation() async {
+    servicePermission = await Geolocator.isLocationServiceEnabled();
+
+    if (!servicePermission) {
+      print('service disabled');
+    }
+
+    permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  getAddressFromCoordinates() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          currentLocation!.latitude,
+          currentLocation!.longitude
+      );
+
+      Placemark place = placemarks[0];
+
+      print(place.locality);
+
+      setState(() {
+        currentAddress = "${place.locality}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrentLocation();
+  }
+
+  void fetchCurrentLocation() async{
+    //calling the api
+    currentLocation = await getCurrentLocation();
+    print(currentLocation);
+    await getAddressFromCoordinates();
+
+    //setState will update the values in real time
+    setState(() {
+      markerPoint = currentLocation;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +97,8 @@ class LocationAndDate extends StatelessWidget {
     String numberOfMonth = DateFormat.M(locale).format(now);
     String year = DateFormat.y(locale).format(now);
 
+
+
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 8),
       child: Row(
@@ -48,7 +117,7 @@ class LocationAndDate extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Санкт-Петербург',
+                    '${currentAddress}',
                     style: TextStyle(
                         fontSize: 18,
                         color: AppColors.black,
