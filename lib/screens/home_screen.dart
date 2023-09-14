@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shop_minin_test_app/repositories/product_category_repository.dart';
 import 'package:shop_minin_test_app/widgets/bottom_navigation.dart';
 import 'package:shop_minin_test_app/widgets/custom_app_bar.dart';
 
-import '../models/category_model.dart';
+import '../models/product_category_model.dart';
 import '../widgets/category_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,48 +14,57 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Category> categories = [
-    Category(
+  final List<ProductCategory> categories = [
+    ProductCategory(
         id: 1,
         name: 'Пекарни и кондитерское',
         imageUrl: 'assets/images/category_1.png'
     ),
-    Category(
+    ProductCategory(
         id: 2,
         name: 'Фастфуд',
         imageUrl: 'assets/images/category_2.png'
     ),
-    Category(
+    ProductCategory(
         id: 3,
         name: 'Азиатская кухня',
         imageUrl: 'assets/images/category_3.png'
     ),
-    Category(
+    ProductCategory(
         id: 4,
         name: 'Супы',
         imageUrl: 'assets/images/category_4.png'
     ),
-    Category(
+    ProductCategory(
         id: 1,
         name: 'Пекарни и кондитерское',
         imageUrl: 'assets/images/category_1.png'
     ),
-    Category(
+    ProductCategory(
         id: 2,
         name: 'Фастфуд',
         imageUrl: 'assets/images/category_2.png'
     ),
-    Category(
+    ProductCategory(
         id: 3,
         name: 'Азиатская кухня',
         imageUrl: 'assets/images/category_3.png'
     ),
-    Category(
+    ProductCategory(
         id: 4,
         name: 'Супы',
         imageUrl: 'assets/images/category_4.png'
     ),
   ];
+
+  final productCategoryRepository = ProductCategoryRepository();
+  late Future<List<ProductCategory>?> productCategoryFuture;
+
+  @override
+  void initState() {
+    productCategoryFuture = productCategoryRepository.getProductCategories();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +72,43 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
-        child: ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (_, index) {
-              return CategoryCard(category: categories[index],);
-            }
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            FutureBuilder<List<ProductCategory>?>(
+                future: productCategoryFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    final error = snapshot.error;
+
+                    return Text(
+                      error.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
+                    final productCategories = snapshot.data;
+
+                    return Column(
+                      children: productCategories!.map((pc) => CategoryCard(category: pc,)).toList(),
+                    );
+                  } else {
+                    return Text('ХЗ!');
+                  }
+                },
+            ),
+          ],
+        )
+        // ListView.builder(
+        //     itemCount: categories.length,
+        //     itemBuilder: (_, index) {
+        //       return CategoryCard(category: categories[index],);
+        //     }
+        // ),
       ),
       bottomNavigationBar: const BottomNavigation(selectedIndex: 0,),
     );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/category_model.dart';
+import '../models/product_category_model.dart';
 import '../screens/category_screen.dart';
 import '../theme/app_colors.dart';
 
 class CategoryCard extends StatelessWidget {
-  final Category category;
+  final ProductCategory category;
 
   const CategoryCard({super.key, required this.category});
 
@@ -19,7 +19,7 @@ class CategoryCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: Image.network(
                 category.imageUrl,
                 fit: BoxFit.cover,
                 height: 148,
