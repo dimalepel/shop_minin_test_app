@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_minin_test_app/repositories/cart_product_repository.dart';
 import 'package:shop_minin_test_app/widgets/accent_button.dart';
 import 'package:shop_minin_test_app/widgets/custom_app_bar.dart';
 
@@ -6,43 +9,14 @@ import '../models/cart_product_model.dart';
 import '../widgets/cart_item.dart';
 import '../widgets/bottom_navigation.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  List<CartProduct> products = [
-    CartProduct(
-        id: 1,
-        name: 'Рис с овощами',
-        imageUrl: 'assets/images/product_1.png',
-        price: 799,
-        weight: 560,
-        qty: 1
-    ),
-    CartProduct(
-        id: 2,
-        name: 'Салат по восточному',
-        imageUrl: 'assets/images/product_2.png',
-        price: 799,
-        weight: 560,
-        qty: 1
-    ),
-    CartProduct(
-        id: 3,
-        name: 'Рыба с овощами и рисом',
-        imageUrl: 'assets/images/product_3.png',
-        price: 799,
-        weight: 560,
-        qty: 1
-    ),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    List<CartProduct> cartItems = Provider.of<CartProductRepository>(context).cartItems;
+    int totalAmount = Provider.of<CartProductRepository>(context).totalAmount;
+
     return Scaffold(
       appBar: const CustomAppBar(),
       body: Padding(
@@ -55,15 +29,15 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             SingleChildScrollView(
               child: ListView.builder(
-                itemCount: products.length,
+                itemCount: cartItems.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (_, index) {
-                  return CartItem(product: products[index]);
+                  return CartItem(product: cartItems[index]);
                 }
               ),
             ),
-            AccentButton(label: 'Оплатить 2 004 ₽', onTap: () {}),
+            AccentButton(label: 'Оплатить ${(NumberFormat().format(totalAmount)).toString().replaceAll(',', ' ')} ₽', onTap: () {}),
           ],
         ),
       ),

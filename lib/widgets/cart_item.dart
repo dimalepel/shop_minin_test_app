@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_minin_test_app/models/cart_product_model.dart';
+import 'package:shop_minin_test_app/repositories/cart_product_repository.dart';
 
 import '../theme/app_colors.dart';
 
@@ -21,13 +23,13 @@ class CartItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  color: AppColors.grey,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Container(
+                    color: AppColors.grey,
+                    child: Image.network(
                       product.imageUrl,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       height: 62,
                       width: 62,
                     ),
@@ -84,7 +86,7 @@ class CartItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () => Provider.of<CartProductRepository>(context, listen: false).updateItemsSubOne(product.id),
                     child: Center(
                       child: SvgPicture.asset(
                         'assets/images/svgs/icon_minus.svg',
@@ -93,8 +95,8 @@ class CartItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Text(
-                    '1',
+                  Text(
+                    '${product.qty.toString()}',
                     style: TextStyle(
                         fontFamily: 'San Francisco',
                         fontSize: 14,
@@ -102,7 +104,7 @@ class CartItem extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () => Provider.of<CartProductRepository>(context, listen: false).updateItemsAddOne(product.id),
                     child: Center(
                       child: SvgPicture.asset(
                         'assets/images/svgs/icon_plus.svg',
