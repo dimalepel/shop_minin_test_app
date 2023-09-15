@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_minin_test_app/repositories/location_repository.dart';
 
 import '../theme/app_colors.dart';
 
@@ -60,6 +62,8 @@ class _LocationAndDateState extends State<LocationAndDate> {
   void initState() {
     super.initState();
     fetchCurrentLocation();
+
+    //print(Provider.of<LocationRepository>(context, listen: false).getAddressFromCoordinates());
   }
 
   void fetchCurrentLocation() async{

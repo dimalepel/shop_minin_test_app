@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_minin_test_app/repositories/cart_product_repository.dart';
 import 'package:shop_minin_test_app/widgets/accent_button.dart';
 
 import '../models/product_model.dart';
@@ -115,7 +117,20 @@ class ProductDetail extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16,),
-          AccentButton(label: 'Добавить в корзину', onTap: () {},),
+          AccentButton(
+            label: 'Добавить в корзину',
+            onTap: () {
+              print('Товар добавлен');
+              Provider.of<CartProductRepository>(context, listen: false).addItem(
+                  product.id,
+                  product.name,
+                  product.imageUrl,
+                  product.price,
+                  product.weight,
+                  1
+              );
+            },
+          ),
         ],
       ),
     );
