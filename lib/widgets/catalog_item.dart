@@ -22,14 +22,17 @@ class CatalogItem extends StatelessWidget {
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            color: AppColors.grey,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              width: double.infinity,
+              color: AppColors.grey,
+              padding: EdgeInsets.all(8),
+              child: Image.network(
                 product.imageUrl,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 height: 109,
                 width: 109,
               ),

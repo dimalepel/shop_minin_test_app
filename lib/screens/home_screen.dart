@@ -14,49 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<ProductCategory> categories = [
-    ProductCategory(
-        id: 1,
-        name: 'Пекарни и кондитерское',
-        imageUrl: 'assets/images/category_1.png'
-    ),
-    ProductCategory(
-        id: 2,
-        name: 'Фастфуд',
-        imageUrl: 'assets/images/category_2.png'
-    ),
-    ProductCategory(
-        id: 3,
-        name: 'Азиатская кухня',
-        imageUrl: 'assets/images/category_3.png'
-    ),
-    ProductCategory(
-        id: 4,
-        name: 'Супы',
-        imageUrl: 'assets/images/category_4.png'
-    ),
-    ProductCategory(
-        id: 1,
-        name: 'Пекарни и кондитерское',
-        imageUrl: 'assets/images/category_1.png'
-    ),
-    ProductCategory(
-        id: 2,
-        name: 'Фастфуд',
-        imageUrl: 'assets/images/category_2.png'
-    ),
-    ProductCategory(
-        id: 3,
-        name: 'Азиатская кухня',
-        imageUrl: 'assets/images/category_3.png'
-    ),
-    ProductCategory(
-        id: 4,
-        name: 'Супы',
-        imageUrl: 'assets/images/category_4.png'
-    ),
-  ];
-
   final productCategoryRepository = ProductCategoryRepository();
   late Future<List<ProductCategory>?> productCategoryFuture;
 
@@ -69,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -78,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           future: productCategoryFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                   child: CircularProgressIndicator()
               );
             } else if (snapshot.hasError) {
@@ -102,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             } else {
-              return Text('Что-то пошло не так!');
+              return const Text('Что-то пошло не так!');
             }
           },
         ),

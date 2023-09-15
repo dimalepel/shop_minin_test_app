@@ -27,7 +27,7 @@ class ProductDetail extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     height: 232,
-                    child: Image.asset(
+                    child: Image.network(
                       product.imageUrl,
                       fit: BoxFit.contain,
                       height: 204,

@@ -1,19 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import '../failure.dart';
-import '../models/product_category_model.dart';
+import 'package:http/http.dart' as http;
 
-class ProductCategoryService {
-  Future<List<ProductCategory>?> getProductCategories() async {
+import '../models/product_model.dart';
+
+class ProductService {
+  Future<List<Product>?> getProducts() async {
     try {
-      final response = await http.get(Uri.parse('https://run.mocky.io/v3/058729bd-1402-4578-88de-265481fd7d54'));
+      final response = await http.get(Uri.parse('https://run.mocky.io/v3/aba7ecaa-0a70-453b-b62d-0e326c859b3b'));
 
       var json = jsonDecode(response.body);
-      List<ProductCategory> categories = ProductCategoryResponse.fromJson(json).categories;
+      List<Product> products = ProductResponse.fromJson(json).dishes;
 
-      return categories;
+      return products;
     } on SocketException {
       throw const Failure('Отсутствует Интернет-соединение :|');
     } on HttpException {
