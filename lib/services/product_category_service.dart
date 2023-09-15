@@ -15,11 +15,11 @@ class ProductCategoryService {
 
       return categories;
     } on SocketException {
-      throw const Failure('No Internet connection :|');
+      throw const Failure('Отсутствует Интернет-соединение :|');
     } on HttpException {
-      throw const Failure('Could not find the categories :0');
+      throw const Failure('Категорий не найдено :0');
     } on FormatException {
-      throw const Failure('Bad response format :(');
+      throw const Failure('Формат ответа не верен :(');
     }
   }
 }

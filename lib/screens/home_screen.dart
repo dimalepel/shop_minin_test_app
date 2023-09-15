@@ -70,45 +70,42 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: Padding(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
         padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            FutureBuilder<List<ProductCategory>?>(
-                future: productCategoryFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    final error = snapshot.error;
+        child: FutureBuilder<List<ProductCategory>?>(
+          future: productCategoryFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator()
+              );
+            } else if (snapshot.hasError) {
+              final error = snapshot.error;
 
-                    return Text(
-                      error.toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20
-                      ),
-                    );
-                  } else if (snapshot.hasData) {
-                    final productCategories = snapshot.data;
+              return Center(
+                child: Text(
+                  error.toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 20
+                  ),
+                ),
+              );
+            } else if (snapshot.hasData) {
+              final productCategories = snapshot.data;
 
-                    return Column(
-                      children: productCategories!.map((pc) => CategoryCard(category: pc,)).toList(),
-                    );
-                  } else {
-                    return Text('ХЗ!');
-                  }
-                },
-            ),
-          ],
-        )
-        // ListView.builder(
-        //     itemCount: categories.length,
-        //     itemBuilder: (_, index) {
-        //       return CategoryCard(category: categories[index],);
-        //     }
-        // ),
+              return SingleChildScrollView(
+                child: Column(
+                  children: productCategories!.map((pc) => CategoryCard(category: pc,)).toList(),
+                ),
+              );
+            } else {
+              return Text('Что-то пошло не так!');
+            }
+          },
+        ),
       ),
       bottomNavigationBar: const BottomNavigation(selectedIndex: 0,),
     );
