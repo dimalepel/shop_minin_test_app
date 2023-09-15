@@ -35,7 +35,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
         toolbarHeight: 57,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios, size: 24,),
           color: AppColors.black,
           onPressed: () => Navigator.of(context).pop(),
         )
