@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_minin_test_app/repositories/tag_repository.dart';
 import 'package:shop_minin_test_app/widgets/food_app.dart';
 
 void main() {
-  runApp(const FoodApp());
+  runApp(
+      MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => TagRepository())
+          ],
+          child: const FoodApp(),
+      ),
+  );
 }

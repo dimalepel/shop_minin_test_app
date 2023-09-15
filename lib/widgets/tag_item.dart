@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_minin_test_app/repositories/tag_repository.dart';
 
 import '../theme/app_colors.dart';
 
-class Tag extends StatefulWidget {
+class TagItem extends StatelessWidget {
   final String tagName;
   final int index;
-  const Tag({super.key, required this.tagName, required this.index});
+  final Function() onTap;
+  final int currentTagIndex;
 
-  @override
-  State<Tag> createState() => _TagState();
-}
+  const TagItem({super.key, required this.tagName, required this.index, required this.onTap, required this.currentTagIndex});
 
-class _TagState extends State<Tag> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return FittedBox(
@@ -25,19 +20,17 @@ class _TagState extends State<Tag> {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
-            color: (widget.index == 0) ? AppColors.blue : AppColors.grey,
+            color: (currentTagIndex == index) ? AppColors.blue : AppColors.grey,
             borderRadius: BorderRadius.circular(10)
         ),
         child: InkWell(
-          onTap: () {
-            print(widget.tagName);
-          },
+          onTap: onTap,
           child: Center(
             child: FittedBox(
               child: Text(
-                widget.tagName,
+                tagName,
                 style: TextStyle(
-                    color: (widget.index == 0) ? Colors.white : Colors.black,
+                    color: (currentTagIndex == index) ? Colors.white : Colors.black,
                     fontWeight: FontWeight.w400,
                     fontSize: 14
                 ),

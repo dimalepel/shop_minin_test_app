@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_minin_test_app/repositories/product_repository.dart';
+import 'package:shop_minin_test_app/repositories/tag_repository.dart';
 
 import '../models/product_model.dart';
 import '../widgets/basic_app_bar.dart';
 import '../widgets/bottom_navigation.dart';
 import '../widgets/catalog_item.dart';
-import '../widgets/tag.dart';
+import '../widgets/tag_item.dart';
 
 class CategoryScreen extends StatefulWidget {
   final String categoryName;
@@ -19,7 +21,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   final productRepository = ProductRepository();
   late Future<List<Product>?> productFuture;
-  late String filterTag = "Все меню";
+  int currentTagIndex = 0;
 
   @override
   void initState() {
@@ -55,13 +57,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
               );
             } else if (snapshot.hasData) {
-              //final products = snapshot.data!.map((p) => p.tags.contains(filterTag));
               final products = snapshot.data;
-              final filteredProducts = snapshot.data!.where((p) => p.tags.contains(filterTag));
-
-              print(filteredProducts.length);
-
-
+              final filteredProducts = snapshot.data!.where((p) => p.tags.contains(Provider.of<TagRepository>(context).filterTag)).toList();
 
               late Set<String> tagsSet = {};
               late List<String> tags = [];
@@ -86,7 +83,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           scrollDirection: Axis.horizontal,
                           itemCount: tags.length,
                           itemBuilder: (context, index) {
-                            return Tag(tagName: tags[index], index: index,);
+                            return TagItem(
+                              tagName: tags[index],
+                              index: index,
+                              currentTagIndex: currentTagIndex,
+                              onTap: () {
+                                Provider.of<TagRepository>(context, listen: false).setFilterTag(tags[index]);
+                                setState(() {
+                                  currentTagIndex = index;
+                                });
+                              },
+                            );
                           }
                       ),
                     ),
@@ -102,9 +109,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         childAspectRatio: 1.0,
                         mainAxisExtent: 162,
                       ),
-                      itemCount: products.length,
+                      itemCount: filteredProducts.length,
                       itemBuilder: (_, index) {
-                        return CatalogItem(product: products[index],);
+                        return CatalogItem(product: filteredProducts[index],);
                       },
                     )
                   ],
