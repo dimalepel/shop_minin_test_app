@@ -120,7 +120,11 @@ class ProductDetail extends StatelessWidget {
           AccentButton(
             label: 'Добавить в корзину',
             onTap: () {
-              print('Товар добавлен');
+              final snackBar = SnackBar(
+                content: const Text('Товар добавлен в корзину!'),
+                backgroundColor: AppColors.blue,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Provider.of<CartProductRepository>(context, listen: false).addItem(
                   product.id,
                   product.name,

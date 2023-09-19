@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_minin_test_app/repositories/tag_repository.dart';
 
 import '../theme/app_colors.dart';
 

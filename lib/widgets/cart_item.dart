@@ -53,7 +53,7 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${product.price.toString()} \₽ ',
+                          '${product.price.toString()} ₽ ',
                           style: TextStyle(
                               fontSize: 14,
                               color: AppColors.black
@@ -96,8 +96,8 @@ class CartItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${product.qty.toString()}',
-                    style: TextStyle(
+                    product.qty.toString(),
+                    style: const TextStyle(
                         fontFamily: 'San Francisco',
                         fontSize: 14,
                         fontWeight: FontWeight.w500

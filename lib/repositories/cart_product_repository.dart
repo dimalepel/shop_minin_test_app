@@ -3,15 +3,15 @@ import 'package:flutter/cupertino.dart';
 import '../models/cart_product_model.dart';
 
 class CartProductRepository extends ChangeNotifier {
-  List<CartProduct> _cartItems = [];
+  final List<CartProduct> _cartItems = [];
 
   List<CartProduct> get cartItems => _cartItems;
   int get totalAmount {
     var total = 0;
 
-    _cartItems.forEach((item) {
+    for (var item in _cartItems) {
       total += item.price * item.qty;
-    });
+    }
 
     return total;
   }
@@ -42,7 +42,6 @@ class CartProductRepository extends ChangeNotifier {
   }
 
   void updateItemsAddOne(int id) {
-    print(id);
     int itemIndex = _cartItems.indexWhere((item) => item.id == id);
 
     _cartItems[itemIndex].qty += 1;
@@ -51,7 +50,6 @@ class CartProductRepository extends ChangeNotifier {
   }
 
   void updateItemsSubOne(int id) {
-    print(id);
     int itemIndex = _cartItems.indexWhere((item) => item.id == id);
 
     if (_cartItems[itemIndex].qty < 2) {

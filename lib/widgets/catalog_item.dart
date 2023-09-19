@@ -29,7 +29,7 @@ class CatalogItem extends StatelessWidget {
             child: Container(
               width: double.infinity,
               color: AppColors.grey,
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Image.network(
                 product.imageUrl,
                 fit: BoxFit.contain,

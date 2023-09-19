@@ -14,8 +14,8 @@ class FoodApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('ru', 'RU'),
+        Locale('en', 'US'),
+        Locale('ru', 'RU'),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Доставка Еды',

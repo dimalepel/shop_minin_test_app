@@ -3,9 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_minin_test_app/repositories/location_repository.dart';
-
 import '../theme/app_colors.dart';
 
 class LocationAndDate extends StatefulWidget {
@@ -20,16 +17,10 @@ class _LocationAndDateState extends State<LocationAndDate> {
   var markerPoint;
   late bool servicePermission = false;
   late LocationPermission permission;
-
   String currentAddress = "";
 
   Future<Position> getCurrentLocation() async {
     servicePermission = await Geolocator.isLocationServiceEnabled();
-
-    if (!servicePermission) {
-      print('service disabled');
-    }
-
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
@@ -48,34 +39,25 @@ class _LocationAndDateState extends State<LocationAndDate> {
 
       Placemark place = placemarks[0];
 
-      print(place.locality);
-
       setState(() {
         currentAddress = "${place.locality}";
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
+  }
+
+  void fetchCurrentLocation() async{
+    currentLocation = await getCurrentLocation();
+    await getAddressFromCoordinates();
+
+    setState(() {
+      markerPoint = currentLocation;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     fetchCurrentLocation();
-
-    //print(Provider.of<LocationRepository>(context, listen: false).getAddressFromCoordinates());
-  }
-
-  void fetchCurrentLocation() async{
-    //calling the api
-    currentLocation = await getCurrentLocation();
-    print(currentLocation);
-    await getAddressFromCoordinates();
-
-    //setState will update the values in real time
-    setState(() {
-      markerPoint = currentLocation;
-    });
   }
 
   @override
@@ -101,8 +83,6 @@ class _LocationAndDateState extends State<LocationAndDate> {
     String numberOfMonth = DateFormat.M(locale).format(now);
     String year = DateFormat.y(locale).format(now);
 
-
-
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 8),
       child: Row(
@@ -121,7 +101,7 @@ class _LocationAndDateState extends State<LocationAndDate> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${currentAddress}',
+                    currentAddress,
                     style: TextStyle(
                         fontSize: 18,
                         color: AppColors.black,
@@ -131,7 +111,7 @@ class _LocationAndDateState extends State<LocationAndDate> {
                   ),
                   const SizedBox(height: 4,),
                   Text(
-                    '${dayOfWeek} ${monthsList[int.parse(numberOfMonth) - 1]}, ${year}',
+                    '$dayOfWeek ${monthsList[int.parse(numberOfMonth) - 1]}, $year',
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'San Francisco',
