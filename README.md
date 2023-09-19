@@ -39,7 +39,7 @@
 </details>
 
 ## Видео работы приложения:
-
+https://github.com/dimalepel/shop_minin_test_app/assets/10213719/01484e61-8601-43b5-88e3-5c5be2f29700
 
 ## Скачать приложение можно отсканировав QR-код:
 ![](resources/qr-code.gif)
